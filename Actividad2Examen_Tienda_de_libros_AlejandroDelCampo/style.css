@@ -1,0 +1,48 @@
+*{box-sizing:border-box}
+body{
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#e0f7fa,#fff1f8);
+  margin:0;
+  padding:20px;
+  color:#222;
+}
+header{
+  text-align:center;
+  background:#4a90e2;
+  color:#fff;
+  padding:14px 10px;
+  border-radius:8px;
+  font-weight:600;
+  box-shadow:0 4px 12px rgba(0,0,0,0.12);
+  margin-bottom:18px;
+}
+main{
+  max-width:980px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1fr;
+  gap:18px;
+}
+.card{
+  background:#fff;
+  padding:16px;
+  border-radius:10px;
+  box-shadow:0 6px 18px rgba(74,144,226,0.08);
+  animation:pop .5s ease;
+}
+h2{margin:6px 0 12px 0;color:#333}
+label{display:block;margin-top:10px;font-weight:600;font-size:0.95em;color:#333}
+input,select{width:100%;padding:8px;margin-top:6px;border-radius:6px;border:1.6px solid #d6e6f8;font-size:0.95em;transition:all .18s}
+input:focus,select:focus{outline:none;box-shadow:0 0 6px rgba(74,144,226,0.18);border-color:#4a90e2}
+.checkbox{margin-top:12px;font-weight:500}
+.btn{display:inline-block;width:100%;background:#4a90e2;color:#fff;border:none;padding:10px;border-radius:8px;cursor:pointer;font-weight:600;margin-top:12px;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 6px 18px rgba(74,144,226,0.18)}
+.btn.outline{background:transparent;color:#4a90e2;border:2px solid #4a90e2;width:48%;display:inline-block;margin-right:4%}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+.table-wrap{overflow:auto;max-height:220px;border:1px solid #eef6fb;border-radius:6px;padding:6px;margin-top:6px;background:#fbfeff}
+table{width:100%;border-collapse:collapse;font-size:0.95em}
+th,td{padding:8px;text-align:left;border-bottom:1px solid #f1f6fb}
+th{background:#f5fbff;font-weight:700;color:#333;position:sticky;top:0}
+.total-general{margin-top:12px;text-align:right;font-size:1.05em}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(max-width:800px){.grid{grid-template-columns:1fr} .btn.outline{width:100%;margin-right:0;margin-bottom:8px} .btn{width:100%}}

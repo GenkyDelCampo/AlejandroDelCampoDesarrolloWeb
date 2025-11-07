@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Tienda de Libros - Registro y Pedido</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>📚 Tienda de Libros</header>
+
+<main>
+  <section class="card">
+    <h2>Crear Cuenta</h2>
+    <form id="formRegistro" onsubmit="return validarFormulario()">
+      <label>Nombre</label>
+      <input id="nombre" type="text" required>
+
+      <label>Apellidos</label>
+      <input id="apellidos" type="text" required>
+
+      <label>Teléfono (xxx xx xx xx)</label>
+      <input id="telefono" type="text" placeholder="555 12 34 56" required>
+
+      <label>Password (mínimo 8 caracteres)</label>
+      <input id="password" type="password" required>
+
+      <label>Áreas de interés</label>
+      <select id="interes" required>
+        <option value="">Selecciona...</option>
+        <option value="programacion">Programación</option>
+        <option value="diseno">Diseño</option>
+        <option value="ciencias">Ciencias</option>
+      </select>
+
+      <label>Fecha de nacimiento</label>
+      <input id="fecha" type="date" required>
+
+      <label class="checkbox">
+        <input id="acepta" type="checkbox"> Acepto los términos de protección de datos
+      </label>
+
+      <button type="submit" class="btn">Agregar</button>
+    </form>
+  </section>
+
+  <section class="card">
+    <h2>Seleccionar libros y pedido</h2>
+    <div class="grid">
+      <div>
+        <label>Libro</label>
+        <select id="libro">
+          <option value="">Selecciona un libro</option>
+          <option value="El principito">El Principito</option>
+          <option value="Cien años de soledad">Cien años de soledad</option>
+          <option value="Aprende JavaScript">Aprende JavaScript</option>
+          <option value="Diseño web moderno">Diseño Web Moderno</option>
+        </select>
+
+        <label>Precio (solo números, hasta 2 decimales)</label>
+        <input id="precio" type="number" step="0.01" min="0" placeholder="150.00">
+
+        <label>IVA</label>
+        <select id="iva">
+          <option value="0.10">Reducido 10%</option>
+          <option value="0.21" selected>Normal 21%</option>
+        </select>
+
+        <label>Total (con IVA)</label>
+        <input id="resultado" type="text" readonly placeholder="0.00 MXN">
+
+        <div class="buttons">
+          <button type="button" class="btn outline" onclick="calcularTotal()">Calcular</button>
+          <button type="button" class="btn" onclick="agregarAlPedido()">Agregar al pedido</button>
+        </div>
+      </div>
+
+      <div>
+        <label>Lista de pedidos</label>
+        <div class="table-wrap">
+          <table id="tablaPedidos">
+            <thead>
+              <tr>
+                <th>Libro</th>
+                <th>Precio</th>
+                <th>IVA</th>
+                <th>Total</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- filas se añadirán aquí -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="total-general">
+          <strong>Total general:</strong> <span id="totalGeneral">0.00 MXN</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer></footer>
+
+<script src="script.js"></script>
+</body>
+</html>
