@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoLab A&A - Tu Tienda de Tecnología en Línea</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">🏪</span>
+                <div>
+                    <div class="logo-text">CryptoLab A&A</div>
+                    <div class="logo-subtitle">Tecnología & Innovación</div>
+                </div>
+            </div>
+            <div class="user-info" id="userInfo" style="display: none;">
+                <span class="user-icon">👤</span>
+                <span id="userName"></span>
+            </div>
+            
+            <!-- Menú Hamburguesa para Móvil -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn" onclick="toggleMobileMenu()">
+                <span class="hamburger-icon">☰</span>
+            </button>
+            
+            <nav class="nav-buttons" id="navButtons">
+                <button class="nav-btn active" onclick="showPage('home'); closeMobileMenu()">
+                    <span>🏠</span> Inicio
+                </button>
+                <button class="nav-btn" onclick="showPage('inventory'); closeMobileMenu()">
+                    <span>📦</span> Inventario
+                </button>
+                <button class="nav-btn" onclick="showPage('about'); closeMobileMenu()">
+                    <span>ℹ️</span> Nosotros
+                </button>
+                <button class="nav-btn" onclick="showPage('contact'); closeMobileMenu()">
+                    <span>✉️</span> Contacto
+                </button>
+                <button class="nav-btn" id="authBtn" onclick="showPage('login'); closeMobileMenu()">
+                    <span>🔐</span> Iniciar Sesión
+                </button>
+                <button class="nav-btn cart-btn-nav" id="cart-btn" onclick="showPage('cart'); closeMobileMenu()">
+                    <span>🛒</span> Carrito
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- ==================== PÁGINA DE INICIO ==================== -->
+        <div id="home" class="page active">
+            <!-- Hero Section -->
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-title">Bienvenido a CryptoLab A&A</h1>
+                    <p class="hero-subtitle">La mejor tecnología al alcance de tus manos</p>
+                    <p class="hero-description">
+                        Descubre nuestra amplia selección de productos tecnológicos de las mejores marcas. 
+                        Desde smartphones de última generación hasta accesorios innovadores. 
+                        ¡Compra con confianza y recibe envío gratis en compras mayores a $1,000!
+                    </p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-hero-primary" onclick="showPage('inventory')">
+                            Ver Todos los Productos
+                        </button>
+                        <button class="btn btn-hero-secondary" onclick="showPage('about')">
+                            Conoce Más
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Estadísticas -->
+            <div class="stats-section">
+                <div class="stat-card">
+                    <div class="stat-icon">📱</div>
+                    <div class="stat-number" id="productCount">20+</div>
+                    <div class="stat-label">Productos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-number">4.8</div>
+                    <div class="stat-label">Calificación</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">👥</div>
+                    <div class="stat-number">5000+</div>
+                    <div class="stat-label">Clientes</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🚚</div>
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Envíos</div>
+                </div>
+            </div>
+
+            <!-- Ofertas Especiales -->
+            <div class="section-header">
+                <h2 class="section-title">🔥 Ofertas Especiales</h2>
+                <p class="section-subtitle">No te pierdas estas increíbles promociones por tiempo limitado</p>
+            </div>
+            <div class="offers-grid">
+                <div class="offer-banner">
+                    <div class="offer-badge">-20% OFF</div>
+                    <h3>Smartphones</h3>
+                    <p>En modelos seleccionados</p>
+                </div>
+                <div class="offer-banner">
+                    <div class="offer-badge">-15% OFF</div>
+                    <h3>Laptops</h3>
+                    <p>Para estudiantes</p>
+                </div>
+                <div class="offer-banner">
+                    <div class="offer-badge">2x1</div>
+                    <h3>Accesorios</h3>
+                    <p>En productos seleccionados</p>
+                </div>
+            </div>
+
+            <!-- Búsqueda -->
+            <div class="search-section">
+                <h3 class="search-title">¿Qué estás buscando?</h3>
+                <div class="search-container">
+                    <input type="text" id="homeSearch" class="search-box" placeholder="🔍 Buscar productos por nombre o categoría...">
+                    <div class="search-tips">
+                        💡 Prueba buscar: "iPhone", "Laptop", "Audífonos", "Cámara"
+                    </div>
+                </div>
+            </div>
+
+            <!-- Productos Destacados -->
+            <div class="section-header">
+                <h2 class="section-title">⭐ Productos Destacados</h2>
+                <p class="section-subtitle">Los productos más populares y mejor valorados por nuestros clientes</p>
+            </div>
+            <div class="products-grid" id="featuredProducts"></div>
+
+            <!-- Categorías Populares -->
+            <div class="section-header">
+                <h2 class="section-title">📂 Categorías Populares</h2>
+                <p class="section-subtitle">Explora por categoría</p>
+            </div>
+            <div class="categories-grid">
+                <div class="category-card" onclick="filterByCategory('Smartphones')">
+                    <div class="category-icon">📱</div>
+                    <div class="category-name">Smartphones</div>
+                </div>
+                <div class="category-card" onclick="filterByCategory('Laptops')">
+                    <div class="category-icon">💻</div>
+                    <div class="category-name">Laptops</div>
+                </div>
+                <div class="category-card" onclick="filterByCategory('Audífonos')">
+                    <div class="category-icon">🎧</div>
+                    <div class="category-name">Audífonos</div>
+                </div>
+                <div class="category-card" onclick="filterByCategory('Smartwatches')">
+                    <div class="category-icon">⌚</div>
+                    <div class="category-name">Smartwatches</div>
+                </div>
+                <div class="category-card" onclick="filterByCategory('Cámaras')">
+                    <div class="category-icon">📷</div>
+                    <div class="category-name">Cámaras</div>
+                </div>
+                <div class="category-card" onclick="filterByCategory('Consolas')">
+                    <div class="category-icon">🎮</div>
+                    <div class="category-name">Consolas</div>
+                </div>
+            </div>
+
+            <!-- Por qué elegirnos -->
+            <div class="section-header">
+                <h2 class="section-title">¿Por qué elegir CryptoLab A&A?</h2>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🚚</div>
+                    <h3>Envío Gratis</h3>
+                    <p>En compras mayores a $1,000 MXN</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔒</div>
+                    <h3>Compra Segura</h3>
+                    <p>Protección en todas tus transacciones</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">↩️</div>
+                    <h3>Devoluciones</h3>
+                    <p>30 días para cambios y devoluciones</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">💳</div>
+                    <h3>Pagos Flexibles</h3>
+                    <p>Acepta todas las tarjetas y MSI</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== PÁGINA DE INVENTARIO ==================== -->
+        <div id="inventory" class="page">
+            <div class="page-header">
+                <h2 class="page-title">📦 Inventario Completo</h2>
+                <p class="page-description">
+                    Explora nuestro catálogo completo de productos tecnológicos. 
+                    Contamos con más de 20 productos de las mejores marcas del mercado.
+                </p>
+            </div>
+
+            <!-- Filtros y búsqueda -->
+            <div class="inventory-controls">
+                <div class="search-container">
+                    <input type="text" id="inventorySearch" class="search-box" placeholder="🔍 Buscar en todo el inventario...">
+                </div>
+                
+                <div class="filter-section">
+                    <h3>Filtrar por Categoría:</h3>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" onclick="filterInventory('all')">Todos</button>
+                        <button class="filter-btn" onclick="filterInventory('Smartphones')">📱 Smartphones</button>
+                        <button class="filter-btn" onclick="filterInventory('Laptops')">💻 Laptops</button>
+                        <button class="filter-btn" onclick="filterInventory('Audífonos')">🎧 Audífonos</button>
+                        <button class="filter-btn" onclick="filterInventory('Smartwatches')">⌚ Smartwatches</button>
+                        <button class="filter-btn" onclick="filterInventory('Tablets')">📱 Tablets</button>
+                        <button class="filter-btn" onclick="filterInventory('Cámaras')">📷 Cámaras</button>
+                        <button class="filter-btn" onclick="filterInventory('Consolas')">🎮 Consolas</button>
+                        <button class="filter-btn" onclick="filterInventory('Bocinas')">🔊 Bocinas</button>
+                    </div>
+                </div>
+
+                <div class="sort-section">
+                    <label for="sortSelect">Ordenar por:</label>
+                    <select id="sortSelect" class="sort-select" onchange="sortProducts(this.value)">
+                        <option value="default">Predeterminado</option>
+                        <option value="price-low">Precio: Menor a Mayor</option>
+                        <option value="price-high">Precio: Mayor a Menor</option>
+                        <option value="name">Nombre: A-Z</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="products-count" id="productsCount"></div>
+            <div class="products-grid" id="allProducts"></div>
+        </div>
+
+        <!-- ==================== PÁGINA SOBRE NOSOTROS ==================== -->
+        <div id="about" class="page">
+            <div class="page-header">
+                <h2 class="page-title">ℹ️ Sobre CryptoLab A&A</h2>
+                <p class="page-description">Conoce más sobre nuestra empresa y misión</p>
+            </div>
+
+            <div class="about-content">
+                <div class="about-section">
+                    <h3>🎯 Nuestra Misión</h3>
+                    <p>
+                        En CryptoLab A&A, nuestra misión es democratizar el acceso a la tecnología de punta. 
+                        Creemos que todos merecen tener acceso a los mejores productos tecnológicos del mercado 
+                        a precios justos y con un servicio excepcional.
+                    </p>
+                </div>
+
+                <div class="about-section">
+                    <h3>👁️ Nuestra Visión</h3>
+                    <p>
+                        Ser la tienda en línea de tecnología líder en México, reconocida por la calidad de 
+                        nuestros productos, la excelencia en el servicio al cliente y nuestro compromiso con 
+                        la innovación constante.
+                    </p>
+                </div>
+
+                <div class="about-section">
+                    <h3>💎 Nuestros Valores</h3>
+                    <ul class="values-list">
+                        <li><strong>Calidad:</strong> Solo ofrecemos productos originales de las mejores marcas</li>
+                        <li><strong>Confianza:</strong> Transparencia en cada transacción</li>
+                        <li><strong>Innovación:</strong> Actualizamos constantemente nuestro catálogo</li>
+                        <li><strong>Servicio:</strong> Atención personalizada para cada cliente</li>
+                        <li><strong>Compromiso:</strong> Garantía y soporte post-venta</li>
+                    </ul>
+                </div>
+
+                <div class="about-section">
+                    <h3>📍 Nuestra Historia</h3>
+                    <p>
+                        CryptoLab A&A nació en 2020 con la visión de crear una plataforma de comercio electrónico 
+                        que revolucionara la forma de comprar tecnología en línea. Desde entonces, hemos crecido 
+                        hasta convertirnos en una de las tiendas más confiables, atendiendo a más de 5,000 clientes 
+                        satisfechos en todo el país.
+                    </p>
+                </div>
+
+                <div class="about-section">
+                    <h3>🏆 Nuestros Logros</h3>
+                    <div class="achievements-grid">
+                        <div class="achievement">
+                            <div class="achievement-number">5000+</div>
+                            <div class="achievement-text">Clientes Satisfechos</div>
+                        </div>
+                        <div class="achievement">
+                            <div class="achievement-number">20+</div>
+                            <div class="achievement-text">Productos Premium</div>
+                        </div>
+                        <div class="achievement">
+                            <div class="achievement-number">4.8</div>
+                            <div class="achievement-text">Calificación Promedio</div>
+                        </div>
+                        <div class="achievement">
+                            <div class="achievement-number">99%</div>
+                            <div class="achievement-text">Entregas Exitosas</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-section">
+                    <h3>📞 Contáctanos</h3>
+                    <div class="contact-info">
+                        <p>📧 Email: contacto@cryptolabaa.com</p>
+                        <p>📱 Teléfono: (667) 123-4567</p>
+                        <p>📍 Dirección: Culiacán, Sinaloa, México</p>
+                        <p>⏰ Horario: Lunes a Viernes 9:00 AM - 6:00 PM</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== PÁGINA DE CONTACTO ==================== -->
+        <div id="contact" class="page">
+            <div class="page-header">
+                <h2 class="page-title">✉️ Contacto</h2>
+                <p class="page-description">
+                    ¿Tienes preguntas sobre algún producto? ¿Necesitas ayuda con tu pedido? 
+                    Completa el formulario y nos pondremos en contacto contigo lo antes posible.
+                </p>
+            </div>
+
+            <div class="contact-page-content">
+                <div class="contact-info-box">
+                    <h3>Información de Contacto</h3>
+                    <div class="contact-item">
+                        <span class="contact-icon">📧</span>
+                        <div>
+                            <strong>Email</strong>
+                            <p>contacto@cryptolabaa.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📱</span>
+                        <div>
+                            <strong>Teléfono</strong>
+                            <p>(667) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">📍</span>
+                        <div>
+                            <strong>Dirección</strong>
+                            <p>Culiacán, Sinaloa, México</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">⏰</span>
+                        <div>
+                            <strong>Horario</strong>
+                            <p>Lunes a Viernes: 9:00 AM - 6:00 PM</p>
+                            <p>Sábados: 10:00 AM - 2:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="contactForm" class="contact-form-main">
+                    <h3>Envíanos un Mensaje</h3>
+                    <div class="form-group">
+                        <label>Nombre Completo *</label>
+                        <input type="text" id="contactName" required placeholder="Juan Pérez">
+                    </div>
+                    <div class="form-group">
+                        <label>Correo Electrónico *</label>
+                        <input type="email" id="contactEmail" required placeholder="tucorreo@ejemplo.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Producto de Interés</label>
+                        <input type="text" id="contactProduct" readonly placeholder="Ninguno seleccionado">
+                    </div>
+                    <div class="form-group">
+                        <label>Asunto *</label>
+                        <select id="contactSubject" required>
+                            <option value="">Selecciona un asunto</option>
+                            <option value="producto">Consulta sobre producto</option>
+                            <option value="pedido">Estado de pedido</option>
+                            <option value="devolucion">Devolución o cambio</option>
+                            <option value="soporte">Soporte técnico</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Mensaje *</label>
+                        <textarea id="contactMessage" required placeholder="Escribe tu mensaje aquí..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-large">Enviar Mensaje</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- ==================== PÁGINAS DE AUTENTICACIÓN ==================== -->
+        <div id="login" class="page">
+            <div class="auth-page">
+                <div class="auth-box">
+                    <h2 class="auth-title">🔐 Iniciar Sesión</h2>
+                    <p class="auth-subtitle">Ingresa a tu cuenta para continuar</p>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label>Correo Electrónico *</label>
+                            <input type="email" id="loginEmail" required placeholder="tucorreo@ejemplo.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Contraseña *</label>
+                            <input type="password" id="loginPassword" required placeholder="••••••••">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large">Iniciar Sesión</button>
+                        <p class="auth-link">
+                            ¿No tienes cuenta? <a href="#" onclick="showPage('register'); return false;">Regístrate aquí</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="register" class="page">
+            <div class="auth-page">
+                <div class="auth-box">
+                    <h2 class="auth-title">📝 Crear Cuenta</h2>
+                    <p class="auth-subtitle">Únete a nuestra comunidad</p>
+                    <form id="registerForm">
+                        <div class="form-group">
+                            <label>Nombre Completo *</label>
+                            <input type="text" id="regName" required placeholder="Juan Pérez García">
+                        </div>
+                        <div class="form-group">
+                            <label>Correo Electrónico *</label>
+                            <input type="email" id="regEmail" required placeholder="tucorreo@ejemplo.com">
+                        </div>
+                        <div class="form-group">
+                            <label>Contraseña *</label>
+                            <input type="password" id="regPassword" required minlength="8" placeholder="Mínimo 8 caracteres">
+                            <small>Debe contener al menos 8 caracteres</small>
+                        </div>
+                        <div class="form-group">
+                            <label>Confirmar Contraseña *</label>
+                            <input type="password" id="regConfirmPassword" required placeholder="Repite tu contraseña">
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono</label>
+                            <input type="tel" id="regPhone" placeholder="667-123-4567">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-large">Crear Cuenta</button>
+                        <p class="auth-link">
+                            ¿Ya tienes cuenta? <a href="#" onclick="showPage('login'); return false;">Inicia sesión</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== CARRITO ==================== -->
+        <div id="cart" class="page">
+            <div class="page-header">
+                <h2 class="page-title">🛒 Carrito de Compras</h2>
+                <p class="page-description">Revisa los productos que has agregado</p>
+            </div>
+            <div id="cartItems"></div>
+            <div id="cartTotal" style="display: none;"></div>
+            <div id="cartActions" style="text-align: center; margin-top: 2rem;"></div>
+        </div>
+
+        <!-- ==================== PAGO ==================== -->
+        <div id="payment" class="page">
+            <div class="page-header">
+                <h2 class="page-title">💳 Finalizar Compra</h2>
+                <p class="page-description">Completa tu información para procesar el pedido</p>
+            </div>
+            <div class="payment-layout">
+                <div class="payment-summary" id="paymentSummary"></div>
+                <form id="paymentForm" class="payment-form">
+                    <h3>Información de Pago</h3>
+                    <div class="form-group">
+                        <label>Nombre en la Tarjeta *</label>
+                        <input type="text" id="cardName" required placeholder="Como aparece en la tarjeta">
+                    </div>
+                    <div class="form-group">
+                        <label>Número de Tarjeta *</label>
+                        <input type="text" id="cardNumber" maxlength="16" required placeholder="1234 5678 9012 3456">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Fecha de Expiración *</label>
+                            <input type="text" id="cardExpiry" placeholder="MM/AA" maxlength="5" required>
+                        </div>
+                        <div class="form-group">
+                            <label>CVV *</label>
+                            <input type="text" id="cardCVV" maxlength="3" placeholder="123" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Dirección de Envío *</label>
+                        <textarea id="shippingAddress" required placeholder="Calle, Número, Colonia, Ciudad, Estado, CP"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-large">Confirmar Pedido</button>
+                    <button type="button" class="btn btn-secondary btn-large" onclick="showPage('cart')">Volver al Carrito</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE DETALLES DE PRODUCTO -->
+    <div id="productModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🏪 CryptoLab A&A</h3>
+                <p>Tu tienda de tecnología de confianza desde 2020</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">📘 Facebook</a>
+                    <a href="#" class="social-link">📷 Instagram</a>
+                    <a href="#" class="social-link">🐦 Twitter</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Enlaces Rápidos</h3>
+                <ul class="footer-links">
+                    <li><a href="#" onclick="showPage('home'); return false;">Inicio</a></li>
+                    <li><a href="#" onclick="showPage('inventory'); return false;">Inventario</a></li>
+                    <li><a href="#" onclick="showPage('about'); return false;">Nosotros</a></li>
+                    <li><a href="#" onclick="showPage('contact'); return false;">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Información</h3>
+                <ul class="footer-links">
+                    <li>📧 contacto@cryptolabaa.com</li>
+                    <li>📱 (667) 123-4567</li>
+                    <li>📍 Culiacán, Sinaloa</li>
+                    <li>⏰ Lun-Vie: 9AM-6PM</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Políticas</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Términos y Condiciones</a></li>
+                    <li><a href="#">Política de Privacidad</a></li>
+                    <li><a href="#">Política de Devoluciones</a></li>
+                    <li><a href="#">Preguntas Frecuentes</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 CryptoLab A&A. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.12.0/toastify.min.js"></script>
+    <script src="products.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
