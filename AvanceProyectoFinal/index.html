@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wireframe - Cool Center eCommerce</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .wireframe-container {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .wireframe-header {
+            background: #e0e0e0;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 2px dashed #999;
+        }
+        
+        .wireframe-header h1 {
+            font-size: 24px;
+            color: #666;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .nav-btn {
+            padding: 10px 20px;
+            background: #ccc;
+            border: 2px solid #999;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .nav-btn:hover {
+            background: #bbb;
+        }
+        
+        .nav-btn.active {
+            background: #666;
+            color: white;
+        }
+        
+        .page-section {
+            display: none;
+        }
+        
+        .page-section.active {
+            display: block;
+        }
+        
+        .section-title {
+            background: #d0d0d0;
+            padding: 10px;
+            margin: 20px 0 10px 0;
+            border-left: 4px solid #666;
+            font-weight: bold;
+        }
+        
+        .wireframe-box {
+            border: 2px dashed #999;
+            padding: 15px;
+            margin: 10px 0;
+            background: #fafafa;
+        }
+        
+        .wireframe-label {
+            background: #666;
+            color: white;
+            padding: 5px 10px;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-size: 12px;
+        }
+        
+        .search-bar {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ccc;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .product-card {
+            border: 2px solid #ccc;
+            padding: 15px;
+            text-align: center;
+            background: white;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 150px;
+            background: #e0e0e0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 64px;
+        }
+        
+        .product-name {
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .product-price {
+            color: #666;
+            margin: 5px 0;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            background: #666;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            background: #555;
+        }
+        
+        .form-group {
+            margin: 15px 0;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ccc;
+            font-size: 14px;
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .cart-item {
+            border: 2px solid #ccc;
+            padding: 15px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: white;
+        }
+        
+        .cart-total {
+            background: #e0e0e0;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: right;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .annotation {
+            background: #fff9e6;
+            border-left: 4px solid #ffcc00;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 13px;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wireframe-container">
+        <!-- Header -->
+        <div class="wireframe-header">
+            <h1>🏪 COOL CENTER - Tienda en Línea</h1>
+            <div class="nav-buttons">
+                <button class="nav-btn active" onclick="showPage('home')">Inicio</button>
+                <button class="nav-btn" onclick="showPage('inventory')">Ver Inventario</button>
+                <button class="nav-btn" onclick="showPage('contact')">Contacto</button>
+                <button class="nav-btn" onclick="showPage('login')">Login</button>
+                <button class="nav-btn" onclick="showPage('register')">Registro</button>
+                <button class="nav-btn" onclick="showPage('cart')">Carrito 🛒</button>
+            </div>
+        </div>
+
+        <!-- Página Principal -->
+        <div id="home" class="page-section active">
+            <div class="section-title">PÁGINA PRINCIPAL</div>
+            <div class="annotation">
+                📋 Esta es la página de inicio donde los usuarios pueden navegar por los productos destacados y acceder a las diferentes secciones.
+            </div>
+            
+            <div class="wireframe-box">
+                <div class="wireframe-label">BARRA DE BÚSQUEDA (AJAX - Tiempo Real)</div>
+                <input type="text" class="search-bar" placeholder="Buscar productos...">
+                <div class="annotation">
+                    ⚡ La búsqueda se realizará en tiempo real sin recargar la página usando AJAX
+                </div>
+            </div>
+
+            <div class="wireframe-box">
+                <div class="wireframe-label">PRODUCTOS DESTACADOS (Aprox. 8-10 productos)</div>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-image">📱</div>
+                        <div class="product-name">Smartphone Pro</div>
+                        <div class="product-price">$8,999.00</div>
+                        <button class="btn">Ver Detalles</button>
+                        <button class="btn">Agregar al Carrito</button>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">💻</div>
+                        <div class="product-name">Laptop Gamer</div>
+                        <div class="product-price">$15,499.00</div>
+                        <button class="btn">Ver Detalles</button>
+                        <button class="btn">Agregar al Carrito</button>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">🎧</div>
+                        <div class="product-name">Audífonos Bluetooth</div>
+                        <div class="product-price">$2,299.00</div>
+                        <button class="btn">Ver Detalles</button>
+                        <button class="btn">Agregar al Carrito</button>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">⌚</div>
+                        <div class="product-name">Smartwatch Elite</div>
+                        <div class="product-price">$4,799.00</div>
+                        <button class="btn">Ver Detalles</button>
+                        <button class="btn">Agregar al Carrito</button>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn" style="padding: 12px 30px; font-size: 16px;">Ver Todo el Inventario (20 productos)</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Página de Inventario -->
+        <div id="inventory" class="page-section">
+            <div class="section-title">INVENTARIO COMPLETO</div>
+            <div class="annotation">
+                📦 Aquí se mostrarán aproximadamente 20 productos organizados en una cuadrícula
+            </div>
+            
+            <div class="wireframe-box">
+                <div class="wireframe-label">BARRA DE BÚSQUEDA</div>
+                <input type="text" class="search-bar" placeholder="Buscar en inventario...">
+            </div>
+
+            <div class="wireframe-box">
+                <div class="wireframe-label">GRID DE PRODUCTOS (20 productos)</div>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-image">📱</div>
+                        <div class="product-name">Smartphone XYZ</div>
+                        <div class="product-price">$8,999.00</div>
+                        <button class="btn">Ver Detalles</button>
+                        <button class="btn">Agregar</button>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">💻</div>
+                        <div class="product-name">Laptop ABC</div>
+                        <div class="product-price">$15,999.00</div>
+                        <button class="btn">Ver Detalles</button>
+                        <button class="btn">Agregar</button>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">🎧</div>
+                        <div class="product-name">Audífonos Pro</div>
+                        <div class="product-price">$2,499.00</div>
+                        <button class="btn">Ver Detalles</button>
+                        <button class="btn">Agregar</button>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">📱</div>
+                        <div class="product-name">Tablet Max</div>
+                        <div class="product-price">$6,999.00</div>
+                        <button class="btn">Ver Detalles</button>
+                        <button class="btn">Agregar</button>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">⌚</div>
+                        <div class="product-name">Smartwatch Elite</div>
+                        <div class="product-price">$4,299.00</div>
+                        <button class="btn">Ver Detalles</button>
+                        <button class="btn">Agregar</button>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image">📷</div>
+                        <div class="product-name">Cámara Digital</div>
+                        <div class="product-price">$12,999.00</div>
+                        <button class="btn">Ver Detalles</button>
+                        <button class="btn">Agregar</button>
+                    </div>
+                </div>
+                <div class="annotation">
+                    ... Se mostrarían 14 productos más para completar los ~20 productos requeridos
+                </div>
+            </div>
+        </div>
+
+        <!-- Página de Contacto -->
+        <div id="contact" class="page-section">
+            <div class="section-title">CONTACTO</div>
+            <div class="annotation">
+                ✉️ Formulario de contacto que se envía cuando el usuario selecciona un producto del inventario
+            </div>
+            
+            <div class="wireframe-box">
+                <div class="wireframe-label">FORMULARIO DE CONTACTO</div>
+                <form>
+                    <div class="form-group">
+                        <label>Nombre Completo *</label>
+                        <input type="text" placeholder="Ingresa tu nombre completo">
+                    </div>
+                    <div class="form-group">
+                        <label>Correo Electrónico *</label>
+                        <input type="email" placeholder="tucorreo@ejemplo.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Producto de Interés</label>
+                        <input type="text" value="[Se llena automáticamente según el producto seleccionado]" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>Mensaje *</label>
+                        <textarea placeholder="Escribe tu mensaje aquí..."></textarea>
+                    </div>
+                    <button class="btn" type="submit">Enviar Mensaje</button>
+                </form>
+                <div class="annotation">
+                    📧 Al enviar el formulario, se validan todos los campos y se muestra un mensaje de confirmación (Toastify)
+                </div>
+            </div>
+        </div>
+
+        <!-- Página de Login -->
+        <div id="login" class="page-section">
+            <div class="section-title">INICIO DE SESIÓN</div>
+            <div class="annotation">
+                🔐 Los usuarios registrados pueden iniciar sesión para acceder a funcionalidades adicionales
+            </div>
+            
+            <div class="wireframe-box" style="max-width: 500px; margin: 0 auto;">
+                <div class="wireframe-label">FORMULARIO DE LOGIN</div>
+                <form>
+                    <div class="form-group">
+                        <label>Correo Electrónico *</label>
+                        <input type="email" placeholder="tucorreo@ejemplo.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Contraseña *</label>
+                        <input type="password" placeholder="••••••••">
+                    </div>
+                    <button class="btn" type="submit" style="width: 100%;">Iniciar Sesión</button>
+                    <div style="text-align: center; margin-top: 15px;">
+                        <p>¿No tienes cuenta? <a href="#" onclick="showPage('register'); return false;" style="color: #666; font-weight: bold;">Regístrate aquí</a></p>
+                    </div>
+                </form>
+                <div class="annotation">
+                    ✅ Validación: Se verifica que el email y contraseña existan en IndexDB. Si son incorrectos, se muestra un error.
+                </div>
+            </div>
+        </div>
+
+        <!-- Página de Registro -->
+        <div id="register" class="page-section">
+            <div class="section-title">REGISTRO DE USUARIO</div>
+            <div class="annotation">
+                📝 Nuevos usuarios pueden crear una cuenta para realizar compras
+            </div>
+            
+            <div class="wireframe-box" style="max-width: 500px; margin: 0 auto;">
+                <div class="wireframe-label">FORMULARIO DE REGISTRO</div>
+                <form>
+                    <div class="form-group">
+                        <label>Nombre Completo *</label>
+                        <input type="text" placeholder="Juan Pérez">
+                    </div>
+                    <div class="form-group">
+                        <label>Correo Electrónico *</label>
+                        <input type="email" placeholder="tucorreo@ejemplo.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Contraseña *</label>
+                        <input type="password" placeholder="Mínimo 8 caracteres">
+                    </div>
+                    <div class="form-group">
+                        <label>Confirmar Contraseña *</label>
+                        <input type="password" placeholder="Repite tu contraseña">
+                    </div>
+                    <div class="form-group">
+                        <label>Teléfono</label>
+                        <input type="tel" placeholder="667-123-4567">
+                    </div>
+                    <button class="btn" type="submit" style="width: 100%;">Crear Cuenta</button>
+                    <div style="text-align: center; margin-top: 15px;">
+                        <p>¿Ya tienes cuenta? <a href="#" onclick="showPage('login'); return false;" style="color: #666; font-weight: bold;">Inicia sesión</a></p>
+                    </div>
+                </form>
+                <div class="annotation">
+                    ✅ Validaciones:<br>
+                    • Todos los campos obligatorios (*) deben estar llenos<br>
+                    • El email debe tener formato válido<br>
+                    • La contraseña se guardará encriptada en IndexDB<br>
+                    • Al registrarse exitosamente, se muestra pop-up de confirmación y redirección al login
+                </div>
+            </div>
+        </div>
+
+        <!-- Carrito de Compras -->
+        <div id="cart" class="page-section">
+            <div class="section-title">CARRITO DE COMPRAS</div>
+            <div class="annotation">
+                🛒 Los usuarios pueden ver, editar y eliminar productos de su carrito
+            </div>
+            
+            <div class="wireframe-box">
+                <div class="wireframe-label">PRODUCTOS EN EL CARRITO</div>
+                
+                <div class="cart-item">
+                    <div>
+                        <strong>Smartphone XYZ</strong><br>
+                        Precio: $8,999.00<br>
+                        Cantidad: 
+                        <button class="btn" style="padding: 5px 10px;">-</button>
+                        <span style="padding: 0 10px;">1</span>
+                        <button class="btn" style="padding: 5px 10px;">+</button>
+                    </div>
+                    <div>
+                        <button class="btn">Editar</button>
+                        <button class="btn" style="background: #c00;">Eliminar</button>
+                    </div>
+                </div>
+
+                <div class="cart-item">
+                    <div>
+                        <strong>Audífonos Pro</strong><br>
+                        Precio: $2,499.00<br>
+                        Cantidad: 
+                        <button class="btn" style="padding: 5px 10px;">-</button>
+                        <span style="padding: 0 10px;">2</span>
+                        <button class="btn" style="padding: 5px 10px;">+</button>
+                    </div>
+                    <div>
+                        <button class="btn">Editar</button>
+                        <button class="btn" style="background: #c00;">Eliminar</button>
+                    </div>
+                </div>
+
+                <div class="cart-total">
+                    Total: $13,997.00 MXN
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn" style="padding: 15px 40px; font-size: 16px; background: #4CAF50;">Proceder al Pago</button>
+                    <button class="btn" style="padding: 15px 40px; font-size: 16px;">Seguir Comprando</button>
+                </div>
+
+                <div class="annotation">
+                    🔧 Funcionalidades:<br>
+                    • Agregar productos desde el inventario<br>
+                    • Editar cantidad de productos<br>
+                    • Eliminar productos del carrito<br>
+                    • Calcular total automáticamente<br>
+                    • (Opcional) Procesar pago
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer con notas técnicas -->
+        <div class="wireframe-box" style="margin-top: 40px; background: #f0f0f0;">
+            <div class="wireframe-label">INFORMACIÓN DEL WIREFRAME</div>
+            <div style="padding: 10px;">
+                <p style="line-height: 1.6;">
+                    Este wireframe representa la estructura básica y disposición de elementos de la tienda en línea <strong>Cool Center</strong>. 
+                    Cada sección muestra la ubicación y funcionalidad de los componentes principales del sitio web.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            // Ocultar todas las páginas
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Mostrar la página seleccionada
+            document.getElementById(pageId).classList.add('active');
+            
+            // Actualizar botones de navegación
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
